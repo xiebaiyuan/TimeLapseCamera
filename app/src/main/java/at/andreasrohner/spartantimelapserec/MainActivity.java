@@ -50,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements ForegroundService
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		setContentView(R.layout.activity_main); // Use your custom layout
+		ThemeUtils.setStatusBarAppearance(this);
 		if (broadcastReceiver==null) broadcastReceiver = new DeviceStatusReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction("android.intent.action.ACTION_BATTERY_LOW");
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements ForegroundService
 				settingsFragment.setRetainInstance(true);  //do not recreate if orientation is changed
 			}
 				getFragmentManager().beginTransaction()
-						.replace(android.R.id.content, settingsFragment)
+						.replace(R.id.fragment_container, settingsFragment)
 						.commit();
 
 		} else 	Toast.makeText(this, getString(R.string.error_missing_permission), Toast.LENGTH_SHORT).show();
